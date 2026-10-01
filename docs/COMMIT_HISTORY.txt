@@ -1,0 +1,4 @@
+67e6586 chore: initialize project license and safe configuration
+0c85170 feat: create personal portfolio and interactive project narratives
+f51966c test: cover boundary cases and add deployment configuration
+bac2eab docs: explain architecture and interview trade-offs; record verified release
