@@ -2,7 +2,11 @@
 
 A responsive personal website presenting four real builds and an honest learning profile.
 
-**Status:** implemented and checked locally. Public publication is approved; GitHub upload and deployment are blocked on account access. **Live demo:** not deployed; no URL claimed.
+**Status:** local implementation verified. **Live demo:** deployment pending.
+
+[Quick start](#run-locally) · [Engineering decisions](#engineering-decisions) · [Code walkthrough](docs/EXPLAINED.md) · [Mobile preview](docs/screenshot-mobile.png)
+
+![Desktop preview](docs/screenshot-desktop.png)
 
 ## Features
 
@@ -11,6 +15,17 @@ A responsive personal website presenting four real builds and an honest learning
 - Education, current foundations, learning focus and verified contact links.
 - Reduced-motion support, semantic landmarks and visible keyboard focus.
 - Publication status is explicit; no made-up live links or experience claims.
+
+## Engineering decisions
+
+A small frontend with deliberate accessibility choices.
+
+| Decision | Reason |
+| --- | --- |
+| Semantic HTML | Landmarks and native controls provide a clear document structure. |
+| Native project dialogs | Project details support keyboard interaction and Escape to close. |
+| Self-hosted assets | Screenshots and styling are served with the site, without external fonts or analytics. |
+| Verified links only | Live-demo links are enabled only when their deployments have been checked. |
 
 ## Tech stack
 
@@ -34,12 +49,6 @@ The current GitHub links point to the verified existing account, `me-vishnurnair
 ## Verification
 
 The project detail dialog was opened and closed by keyboard in a browser. All four project images were generated from the applications. A 390 px mobile layout was checked for horizontal page overflow. No automated unit test mirrors static markup; functional checks target user behavior instead.
-
-## Screenshots
-
-![Desktop application](docs/screenshot-desktop.png)
-
-[Mobile screenshot](docs/screenshot-mobile.png)
 
 ## Understand the code
 
