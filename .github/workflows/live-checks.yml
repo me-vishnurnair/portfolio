@@ -1,0 +1,32 @@
+name: Live deployment checks
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/live-checks.yml
+      - scripts/check_live.py
+permissions:
+  contents: read
+concurrency:
+  group: live-deployment-checks
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check public pages and core API workflows
+        run: python scripts/check_live.py
+      - name: Preserve the point-in-time verification report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: live-check-results
+          path: live-check-results.json
+          if-no-files-found: warn
+          retention-days: 30
