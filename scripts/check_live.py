@@ -4,6 +4,7 @@ No credentials, real notes, or repository contents are required. Run manually
 with Python 3.12+ or through the Live deployment checks GitHub Actions workflow.
 This is a point-in-time release check, not an uptime monitor.
 """
+import secrets
 import concurrent.futures
 import http.cookiejar
 import io
@@ -20,6 +21,8 @@ from pathlib import Path
 PORTFOLIO = "https://vishnu-portfolio-1ijm.onrender.com"
 NOTELENS = "https://vishnu-notelens.onrender.com"
 REPOCHECK = "https://vishnu-repocheck.onrender.com"
+CAMPUS = "https://vishnu-campustrack.onrender.com"
+CAMPUS_BROWSER = "https://vishnu-campustrack-browser.onrender.com"
 
 
 class Client:
@@ -31,13 +34,15 @@ class Client:
         )
 
     def request(self, path, method="GET", payload=None, raw=None,
-                content_type="application/json", expected=200, origin=None):
+                content_type="application/json", expected=200, origin=None, extra_headers=None):
         data = json.dumps(payload).encode() if payload is not None else raw
         headers = {"User-Agent": "VishnuPortfolio-ReleaseCheck/1.0"}
         if data is not None:
             headers["Content-Type"] = content_type
         if method != "GET":
             headers["Origin"] = origin or self.base
+        if extra_headers:
+            headers.update(extra_headers)
         req = urllib.request.Request(self.base + path, data=data,
                                      headers=headers, method=method)
         try:
@@ -178,10 +183,82 @@ def repocheck():
     return "Assets, sample, JSON and ZIP scans, redacted output, unsafe path and malformed ZIP rejection"
 
 
+
+def campus():
+    client = Client(CAMPUS)
+    assert json.loads(client.warm())["status"] == "ok"
+    page, headers = client.request("/")
+    assert b"CampusTrack" in page
+    client.request("/api/applications", expected=401)
+    credentials = {"username": "check_" + secrets.token_hex(6),
+                   "password": secrets.token_urlsafe(24)}
+    identity = client.json("/api/register", method="POST", payload=credentials, expected=201)
+    csrf = {"X-CSRF-Token": identity["csrf"]}
+    session = next(c for c in client.cookies if c.name == "campus_session")
+    assert session.secure and session.has_nonstandard_attr("HttpOnly")
+    application_id = None
+    other = Client(CAMPUS)
+    other_csrf = None
+    try:
+        data = {"company": "Synthetic release check", "role": "Intern",
+                "status": "Saved", "notes": "=1+1"}
+        client.request("/api/applications", method="POST", payload=data, expected=403)
+        row = client.json("/api/applications", method="POST", payload=data,
+                          expected=201, extra_headers=csrf)
+        application_id = row["id"]
+        assert any(r["id"] == application_id for r in client.json("/api/applications"))
+        data["status"] = "Interview"
+        updated = client.json("/api/applications/" + str(application_id),
+                              method="PUT", payload=data, extra_headers=csrf)
+        assert updated["status"] == "Interview"
+        export = client.request("/api/export")[0].decode()
+        assert "'=1+1" in export
+        other_identity = other.json("/api/register", method="POST", expected=201,
+                                    payload={"username": "check_" + secrets.token_hex(6),
+                                             "password": secrets.token_urlsafe(24)})
+        other_csrf = {"X-CSRF-Token": other_identity["csrf"]}
+        assert other.json("/api/applications") == []
+        other.request("/api/applications/" + str(application_id), method="PUT",
+                      payload=data, extra_headers=other_csrf, expected=404)
+        client.request("/api/applications", method="POST", payload=data,
+                       origin="https://invalid.example", extra_headers=csrf, expected=403)
+        client.json("/api/applications/" + str(application_id), method="DELETE",
+                    payload={}, extra_headers=csrf)
+        application_id = None
+        assert client.json("/api/applications") == []
+        client.json("/api/logout", method="POST", payload={}, extra_headers=csrf)
+        client.request("/api/me", expected=401)
+        identity = client.json("/api/login", method="POST", payload=credentials)
+        csrf = {"X-CSRF-Token": identity["csrf"]}
+        assert client.json("/api/me")["username"] == credentials["username"]
+    finally:
+        if application_id is not None:
+            client.request("/api/applications/" + str(application_id), method="DELETE",
+                           payload={}, extra_headers=csrf)
+        client.request("/api/logout", method="POST", payload={}, extra_headers=csrf)
+        if other_csrf:
+            other.request("/api/logout", method="POST", payload={}, extra_headers=other_csrf)
+    return "Database health, registration/login/logout, secure cookies, CRUD, CSV, CSRF and owner isolation"
+
+
+def campus_browser():
+    client = Client(CAMPUS_BROWSER)
+    page = client.warm("/").decode()
+    assert "Free browser edition" in page and 'id="backup-button"' in page
+    assert 'id="auth-dialog"' not in page
+    assets = Assets()
+    assets.feed(page)
+    for path in assets.paths:
+        assert client.request(path)[0]
+    assert client.request("/static/storage.js")[0]
+    return "Free static edition, modules, backup controls; real browser persistence is checked in CampusTrack CI"
+
+
 def main():
-    checks = {"Portfolio": portfolio, "NoteLens": notelens, "RepoCheck": repocheck}
+    checks = {"Portfolio": portfolio, "NoteLens": notelens, "RepoCheck": repocheck,
+              "CampusTrack account edition": campus, "CampusTrack browser edition": campus_browser}
     results = {}
-    with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
         futures = {executor.submit(check): name for name, check in checks.items()}
         for future in concurrent.futures.as_completed(futures):
             name = futures[future]
@@ -191,15 +268,14 @@ def main():
                 results[name] = {"passed": False, "detail": f"{type(error).__name__}: {error}"}
             print(f"{'PASS' if results[name]['passed'] else 'FAIL'} {name}: {results[name]['detail']}", flush=True)
     report = {"checked_at_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
-              "services": results,
-              "campustrack": "Not checked: production database connection setup is pending."}
+              "services": results}
     Path("live-check-results.json").write_text(json.dumps(report, indent=2) + "\n")
     if os.environ.get("GITHUB_STEP_SUMMARY"):
         with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as summary:
             summary.write("## Live deployment checks\n\n")
             for name, result in results.items():
                 summary.write(f"- **{name}: {'PASS' if result['passed'] else 'FAIL'}** — {result['detail']}\n")
-            summary.write("\nCampusTrack is pending database connection setup and is not covered by this result.\n")
+            summary.write("\nAll hosting remains on free plans. Account-edition database expires on 31 October 2026.\n")
     raise SystemExit(0 if all(r["passed"] for r in results.values()) else 1)
 
 

@@ -2,9 +2,9 @@ const projects = [{
   name: 'CampusTrack',
   image: 'assets/campustrack.png',
   category: 'Full-stack application',
-  description: 'A focused internship tracker with accounts, a saved application board, deadlines, and CSV export.',
+  description: 'An internship tracker with a free browser-saved board, backup and restore, plus a separate account-based Python backend.',
   tags: ['PYTHON', 'FASTAPI', 'SQLALCHEMY', 'JAVASCRIPT'],
-  features: ['Username/password accounts with salted password hashes and expiring server sessions.', 'Owner-scoped database queries and CSRF-protected record changes.', 'Search, stage filtering, deadline counts, edit/delete flows, and CSV export.', 'SQLite for local development; PostgreSQL configuration for deployment.'],
+  features: ['Free browser edition: saved applications on the same browser and device, JSON backup/restore, and safe CSV export.', 'Search, stage filtering, deadline counts, and create/edit/delete flows.', 'Separate account edition: salted password hashes, expiring sessions, ownership checks and CSRF protection.', 'The account demo uses a trial database until 31 October 2026; the browser edition requires no server database.'],
   learning: 'The next learning goal is to trace one request from the browser through authentication to a database query.'
 }, {
   name: 'NoteLens',
@@ -33,7 +33,7 @@ const projects = [{
 }];
 // Only deployments verified through real HTTP feature checks are linked.
 const published = {
-  campustrack: null,
+  campustrack: 'https://vishnu-campustrack-browser.onrender.com',
   notelens: 'https://vishnu-notelens.onrender.com',
   repocheck: 'https://vishnu-repocheck.onrender.com',
   portfolio: 'https://vishnu-portfolio-1ijm.onrender.com'
