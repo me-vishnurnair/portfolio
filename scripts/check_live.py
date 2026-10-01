@@ -110,7 +110,7 @@ def notelens():
         assert session.secure and session.has_nonstandard_attr("HttpOnly")
         for mode in ("lexical", "semantic", "hybrid"):
             result = client.json("/api/search", method="POST",
-                                 payload={"query": "machine learning", "mode": mode})
+                                 payload={"query": "hash table bucket collisions", "mode": mode})
             assert result["results"], f"Sample search returned no results in {mode}"
         client.json("/api/documents", method="POST", payload={"documents": [{
             "name": "release-check.txt",
