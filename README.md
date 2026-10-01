@@ -2,7 +2,7 @@
 
 A responsive personal website presenting four real builds and an honest learning profile.
 
-**Status:** implemented and checked locally. GitHub upload and public deployment are awaiting approval. **Live demo:** not deployed; no URL claimed.
+**Status:** implemented and checked locally. Public publication is approved; GitHub upload and deployment are blocked on account access. **Live demo:** not deployed; no URL claimed.
 
 ## Features
 
@@ -23,7 +23,7 @@ No npm install or build step is required. Static hosting can serve the folder di
 
 ## Deploy
 
-Publish the repository through GitHub Pages after approval, using the included Pages workflow. In GitHub settings choose **GitHub Actions** as the Pages source. It copies only public website assets into the deploy artifact. An explicit manual workflow trigger publishes the prepared site.
+Publish the repository through GitHub Pages once account access is available, using the included Pages workflow. In GitHub settings choose **GitHub Actions** as the Pages source. It copies only public website assets into the deploy artifact. An explicit manual workflow trigger publishes the prepared site.
 
 The current GitHub links point to the verified existing account, `me-vishnurnair`. The preferred handle `vishnurnair-dev` is not assumed available or active. After a confirmed account rename, update these links and the contact details if needed.
 
