@@ -4,7 +4,7 @@ A responsive personal website presenting four real builds and an honest learning
 
 **Source:** published on GitHub. **Live demo:** deployment pending.
 
-[Quick start](#run-locally) · [Engineering decisions](#engineering-decisions) · [Code walkthrough](docs/EXPLAINED.md) · [Mobile preview](docs/screenshot-mobile.png)
+[Resume (PDF)](assets/Vishnu_R_Nair_Resume.pdf) · [Quick start](#run-locally) · [Engineering decisions](#engineering-decisions) · [Code walkthrough](docs/EXPLAINED.md) · [Mobile preview](docs/screenshot-mobile.png)
 
 ![Desktop preview](docs/screenshot-desktop.png)
 
