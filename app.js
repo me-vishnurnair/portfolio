@@ -78,7 +78,7 @@ document.querySelector('#projects').replaceChildren(...projects.map((p, i) => el
   class: 'project-links'
 }, el('button', {
   onclick: () => details(p)
-}, 'Explore the project ↗'), published[Object.keys(published)[i]] ? el('a', {
+}, 'Explore the project ↗'), el('a', { class: 'text-link', href: 'https://github.com/me-vishnurnair/' + Object.keys(published)[i] }, 'View code ↗'), published[Object.keys(published)[i]] ? el('a', {
   class: 'text-link',
   href: published[Object.keys(published)[i]]
 }, 'Live demo ↗') : el('span', {

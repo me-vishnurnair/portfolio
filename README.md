@@ -2,7 +2,7 @@
 
 A responsive personal website presenting four real builds and an honest learning profile.
 
-**Status:** local implementation verified. **Live demo:** deployment pending.
+**Source:** published on GitHub. **Live demo:** deployment pending.
 
 [Quick start](#run-locally) · [Engineering decisions](#engineering-decisions) · [Code walkthrough](docs/EXPLAINED.md) · [Mobile preview](docs/screenshot-mobile.png)
 
