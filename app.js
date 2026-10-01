@@ -31,12 +31,12 @@ const projects = [{
   features: ['Semantic landmarks, keyboard navigation, accessible dialog controls, and responsive layouts.', 'Original CSS illustration and self-hosted project screenshots.', 'No tracking scripts, external font dependencies, or framework build step.', 'Project links are enabled only once the corresponding URLs are verified.'],
   learning: 'The next learning goal is to explain the browser rendering process and how layout changes at different widths.'
 }];
-// Publication URLs remain null until confirmed live. Never invent demo links.
+// Only deployments verified through real HTTP feature checks are linked.
 const published = {
   campustrack: null,
-  notelens: null,
-  repocheck: null,
-  portfolio: null
+  notelens: 'https://vishnu-notelens.onrender.com',
+  repocheck: 'https://vishnu-repocheck.onrender.com',
+  portfolio: 'https://vishnu-portfolio-1ijm.onrender.com'
 };
 
 function el(tag, attrs = {}, ...children) {
@@ -83,5 +83,5 @@ document.querySelector('#projects').replaceChildren(...projects.map((p, i) => el
   href: published[Object.keys(published)[i]]
 }, 'Live demo ↗') : el('span', {
   class: 'pending'
-}, 'Public demo awaiting publication')))));
+}, 'Live demo setup in progress')))));
 document.querySelector('#close-dialog').onclick = () => document.querySelector('#project-dialog').close();

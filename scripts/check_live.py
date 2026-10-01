@@ -81,6 +81,20 @@ class Assets(HTMLParser):
 def portfolio():
     client = Client(PORTFOLIO)
     page = client.warm("/").decode()
+    # Publication can follow this workflow's push. Verify the exact deployed
+    # release, allowing a bounded window for Render's static deployment.
+    for attempt in range(30):
+        actual_script = client.request("/app.js?release=20261001")[0]
+        actual_html = client.request("/?release=20261001")[0]
+        if (actual_script == Path("app.js").read_bytes()
+                and actual_html == Path("index.html").read_bytes()):
+            page = actual_html.decode()
+            break
+        time.sleep(5)
+    else:
+        raise AssertionError("Render is not serving this commit's portfolio assets")
+    assert NOTELENS in actual_script.decode() and REPOCHECK in actual_script.decode()
+    assert "assets/Vishnu_R_Nair_Resume.pdf" in page
     assert "Vishnu R. Nair" in page and 'id="projects"' in page
     assets = Assets()
     assets.feed(page)

@@ -2,7 +2,9 @@
 
 A responsive personal website presenting four real builds and an honest learning profile.
 
-**Source:** published on GitHub. **Live demo:** deployment pending.
+**[Open the live portfolio ↗](https://vishnu-portfolio-1ijm.onrender.com)** · [Download resume](https://vishnu-portfolio-1ijm.onrender.com/assets/Vishnu_R_Nair_Resume.pdf)
+
+[![Live deployment checks](https://github.com/me-vishnurnair/portfolio/actions/workflows/live-checks.yml/badge.svg)](https://github.com/me-vishnurnair/portfolio/actions/workflows/live-checks.yml)
 
 [Resume (PDF)](assets/Vishnu_R_Nair_Resume.pdf) · [Quick start](#run-locally) · [Engineering decisions](#engineering-decisions) · [Code walkthrough](docs/EXPLAINED.md) · [Mobile preview](docs/screenshot-mobile.png)
 
@@ -38,7 +40,9 @@ No npm install or build step is required. Static hosting can serve the folder di
 
 ## Deploy
 
-Publish the repository through GitHub Pages once account access is available, using the included Pages workflow. In GitHub settings choose **GitHub Actions** as the Pages source. It copies only public website assets into the deploy artifact. An explicit manual workflow trigger publishes the prepared site.
+The portfolio is deployed as a Render static site with HTTPS and CDN delivery. Its build copies only `index.html`, `style.css`, `app.js`, `favicon.svg` and `assets/` into `public/`; documentation and test tooling are not published. See [deployment status, verification and recovery](docs/DEPLOYMENT.md).
+
+This service was created from its public Git URL. Render requires a connected Git provider for automatic deploys; until that connection is enabled, use **Manual Deploy → Deploy latest commit** after reviewing a change. The optional GitHub Pages workflow remains available for a separately configured Pages site.
 
 The current GitHub links point to the verified existing account, `me-vishnurnair`. The preferred handle `vishnurnair-dev` is not assumed available or active. After a confirmed account rename, update these links and the contact details if needed.
 
@@ -47,6 +51,8 @@ The current GitHub links point to the verified existing account, `me-vishnurnair
 `app.js` contains the project data and `published` mapping. Enter an actual verified demo URL only after successful deployment. Until then the UI clearly says publication is pending. The four screenshots are real local browser captures, not rendered mockups.
 
 ## Verification
+
+Live HTTP checks passed on 1 October 2026 for the portfolio, NoteLens and RepoCheck. The [verification workflow](https://github.com/me-vishnurnair/portfolio/actions/runs/36832848807) exercises asset delivery, the resume download, note-search sessions and scanner input boundaries. CampusTrack is explicitly excluded until its database connection is completed.
 
 The project detail dialog was opened and closed by keyboard in a browser. All four project images were generated from the applications. A 390 px mobile layout was checked for horizontal page overflow. No automated unit test mirrors static markup; functional checks target user behavior instead.
 
