@@ -1,0 +1,75 @@
+{
+  "url": "https://creditvault.streamlit.app/",
+  "tabs": [
+    {
+      "name": "Fraud prediction",
+      "passed": true
+    },
+    {
+      "name": "Overview",
+      "passed": true
+    },
+    {
+      "name": "Batch analysis",
+      "passed": true
+    },
+    {
+      "name": "Model performance",
+      "passed": true
+    },
+    {
+      "name": "Explainable AI",
+      "passed": true
+    },
+    {
+      "name": "Transaction monitoring",
+      "passed": true
+    }
+  ],
+  "predictions": [
+    {
+      "recorded_label": 0,
+      "flagged": 0,
+      "score": 4.407080996315926e-05,
+      "matches_local_model": true
+    },
+    {
+      "recorded_label": 1,
+      "flagged": 1,
+      "score": 0.9849581718444824,
+      "matches_local_model": true
+    },
+    {
+      "recorded_label": 0,
+      "flagged": 1,
+      "score": 0.9534061551094055,
+      "matches_local_model": true
+    },
+    {
+      "recorded_label": 1,
+      "flagged": 0,
+      "score": 0.8054127097129822,
+      "matches_local_model": true
+    }
+  ],
+  "tls_verified": true,
+  "verified_github_commit": "62432df613b007dd9bd035a306d6a67ee60842e3",
+  "public_access": true,
+  "cloud_status": 5,
+  "backend_health": "ok",
+  "python_version": "3.14.10.final.0",
+  "streamlit_version": "1.65.0",
+  "theme": {
+    "primary_color": "#73E5BC",
+    "secondary_background_color": "#111A2B",
+    "background_color": "#080D18",
+    "text_color": "#E7EEF8",
+    "base": "DARK",
+    "body_font": "sans serif"
+  },
+  "page_title": "FraudShield AI | Credit Card Fraud Detection",
+  "actual_manual_shap_matches": true,
+  "missing_history_prediction_matches": true,
+  "missing_history_metrics_match": true,
+  "passed": true
+}

@@ -52,6 +52,8 @@ The current GitHub links point to the verified existing account, `me-vishnurnair
 
 ## Verification
 
+Latest: [29 October 2026 verification](docs/verification/2026-10-29.md), including all five featured projects. Earlier release checks are retained below.
+
 Live HTTP checks passed on 1 October 2026 for the portfolio, NoteLens and RepoCheck. The [verification workflow](https://github.com/me-vishnurnair/portfolio/actions/runs/36832848807) exercises asset delivery, the resume download, note-search sessions and scanner input boundaries. CampusTrack now has a free static browser edition with local persistence and backup/restore, plus its original account edition on a trial database. See [current hosting and recovery](docs/DEPLOYMENT.md).
 
 The project detail dialog was opened and closed by keyboard in a browser. All project images were generated from the applications. A 390 px mobile layout was checked for horizontal page overflow. No automated unit test mirrors static markup; functional checks target user behavior instead.
