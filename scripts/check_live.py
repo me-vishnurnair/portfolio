@@ -89,8 +89,8 @@ def portfolio():
     # Publication can follow this workflow's push. Verify the exact deployed
     # release, allowing a bounded window for Render's static deployment.
     for attempt in range(30):
-        actual_script = client.request("/app.js?release=20261001")[0]
-        actual_html = client.request("/?release=20261001")[0]
+        actual_script = client.request("/app.js?release=20261029")[0]
+        actual_html = client.request("/?release=20261029")[0]
         if (actual_script == Path("app.js").read_bytes()
                 and actual_html == Path("index.html").read_bytes()):
             page = actual_html.decode()
@@ -100,18 +100,18 @@ def portfolio():
         raise AssertionError("Render is not serving this commit's portfolio assets")
     assert NOTELENS in actual_script.decode() and REPOCHECK in actual_script.decode()
     assert "assets/Vishnu_R_Nair_Resume.pdf" in page
-    assert "Vishnu R. Nair" in page and 'id="projects"' in page
+    assert "Vishnu R Nair" in page and 'id="projects"' in page
     assets = Assets()
     assets.feed(page)
     assert "/app.js" in assets.paths and "/style.css" in assets.paths
     for path in assets.paths:
         assert client.request(path)[0], f"Empty asset: {path}"
-    for name in ("campustrack", "notelens", "repocheck", "portfolio"):
+    for name in ("fraudshield", "campustrack", "notelens", "repocheck", "portfolio"):
         image = client.request(f"/assets/{name}.png")[0]
         assert image.startswith(b"\x89PNG\r\n\x1a\n"), f"Invalid screenshot: {name}"
     pdf = client.request("/assets/Vishnu_R_Nair_Resume.pdf")[0]
     assert pdf.startswith(b"%PDF-") and b"%%EOF" in pdf
-    return "Homepage, linked scripts/styles/icon, four screenshots and resume PDF"
+    return "Homepage, linked scripts/styles/icon, five screenshots and resume PDF"
 
 
 def notelens():

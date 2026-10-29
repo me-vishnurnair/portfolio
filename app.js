@@ -1,5 +1,15 @@
 const projects = [{
+  name: 'FraudShield AI',
+  repo: 'Machine-learning-project',
+  image: 'assets/fraudshield.png',
+  category: 'Machine learning application',
+  description: 'A transaction classifier with readable payment inputs, chronological evaluation and actual SHAP explanations.',
+  tags: ['PYTHON', 'STREAMLIT', 'XGBOOST', 'SHAP'],
+  features: ['Manual payment analysis and validated CSV batches.', 'Strictly earlier spending history and a measured no-history fallback.', 'Logistic Regression baseline and selected XGBoost model.', 'Synthetic dataset; uncalibrated scores and session-only monitoring.'],
+  learning: 'The next learning goal is to explain data leakage, precision and recall, and how a saved model becomes an application.'
+}, {
   name: 'CampusTrack',
+  repo: 'campustrack',
   image: 'assets/campustrack.png',
   category: 'Full-stack application',
   description: 'An internship tracker with a free browser-saved board, backup and restore, plus a separate account-based Python backend.',
@@ -8,6 +18,7 @@ const projects = [{
   learning: 'The next learning goal is to trace one request from the browser through authentication to a database query.'
 }, {
   name: 'NoteLens',
+  repo: 'notelens',
   image: 'assets/notelens.png',
   category: 'Applied machine learning',
   description: 'A study-note search engine that compares keyword retrieval with a learned latent representation, and cites each passage.',
@@ -16,6 +27,7 @@ const projects = [{
   learning: 'The next learning goal is to explain why a retrieval score is not the same thing as factual confidence.'
 }, {
   name: 'RepoCheck',
+  repo: 'repocheck',
   image: 'assets/repocheck.png',
   category: 'Developer tool + API',
   description: 'A read-only repository checker that flags missing essentials and risky patterns, with redacted reports and practical fixes.',
@@ -24,6 +36,7 @@ const projects = [{
   learning: 'The next learning goal is to explain false positives and how bounded input processing reduces risk.'
 }, {
   name: 'This portfolio',
+  repo: 'portfolio',
   image: 'assets/portfolio.png',
   category: 'Responsive web design',
   description: 'A lightweight home for the projects: semantic HTML, responsive CSS, keyboard-accessible details, and honest project status.',
@@ -33,6 +46,7 @@ const projects = [{
 }];
 // Only deployments verified through real HTTP feature checks are linked.
 const published = {
+  'Machine-learning-project': 'https://creditvault.streamlit.app/',
   campustrack: 'https://vishnu-campustrack-browser.onrender.com',
   notelens: 'https://vishnu-notelens.onrender.com',
   repocheck: 'https://vishnu-repocheck.onrender.com',
@@ -78,9 +92,9 @@ document.querySelector('#projects').replaceChildren(...projects.map((p, i) => el
   class: 'project-links'
 }, el('button', {
   onclick: () => details(p)
-}, 'Explore the project ↗'), el('a', { class: 'text-link', href: 'https://github.com/me-vishnurnair/' + Object.keys(published)[i] }, 'View code ↗'), published[Object.keys(published)[i]] ? el('a', {
+}, 'Explore the project ↗'), el('a', { class: 'text-link', href: 'https://github.com/me-vishnurnair/' + p.repo }, 'View code ↗'), published[p.repo] ? el('a', {
   class: 'text-link',
-  href: published[Object.keys(published)[i]]
+  href: published[p.repo]
 }, 'Live demo ↗') : el('span', {
   class: 'pending'
 }, 'Live demo setup in progress')))));

@@ -1,9 +1,10 @@
 # Free hosting and recovery
 
-All five deployments use free plans. The portfolio links CampusTrack's browser edition as its long-term public demo.
+The five Render deployments use free plans. FraudShield is hosted separately on Streamlit Community Cloud. The portfolio links CampusTrack's browser edition as its long-term public demo.
 
 | Application | URL | How it stays available |
 | --- | --- | --- |
+| FraudShield | https://creditvault.streamlit.app/ | Streamlit Community Cloud; may sleep or restart |
 | Portfolio | https://vishnu-portfolio-1ijm.onrender.com | Static hosting; no sleeping server or scheduled database expiry |
 | CampusTrack browser edition | https://vishnu-campustrack-browser.onrender.com | Static hosting; records in the visitor's browser; JSON backup/restore |
 | NoteLens | https://vishnu-notelens.onrender.com | Free Python service; sleeps when idle and wakes when visited |

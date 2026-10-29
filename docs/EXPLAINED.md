@@ -1,4 +1,4 @@
-# Vishnu R. Nair - Portfolio, explained simply
+# Vishnu R Nair - Portfolio, explained simply
 
 ## The idea
 

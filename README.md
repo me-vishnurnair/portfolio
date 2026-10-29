@@ -1,14 +1,14 @@
-# Vishnu R. Nair - Portfolio
+# Vishnu R Nair - Portfolio
 
-A responsive personal website presenting four real builds and an honest learning profile.
+A responsive personal website presenting five real builds and an honest learning profile.
 
 **[Open the live portfolio ↗](https://vishnu-portfolio-1ijm.onrender.com)** · [Download resume](https://vishnu-portfolio-1ijm.onrender.com/assets/Vishnu_R_Nair_Resume.pdf)
 
 [![Live deployment checks](https://github.com/me-vishnurnair/portfolio/actions/workflows/live-checks.yml/badge.svg)](https://github.com/me-vishnurnair/portfolio/actions/workflows/live-checks.yml)
 
-[Resume (PDF)](assets/Vishnu_R_Nair_Resume.pdf) · [Quick start](#run-locally) · [Engineering decisions](#engineering-decisions) · [Code walkthrough](docs/EXPLAINED.md) · [Mobile preview](docs/screenshot-mobile.png)
+[Resume (PDF)](assets/Vishnu_R_Nair_Resume.pdf) · [Quick start](#run-locally) · [Engineering decisions](#engineering-decisions) · [Code walkthrough](docs/EXPLAINED.md) · [Mobile preview](docs/images/screenshot-mobile.png)
 
-![Desktop preview](docs/screenshot-desktop.png)
+![Desktop preview](docs/images/screenshot-desktop.png)
 
 ## Features
 
@@ -48,13 +48,25 @@ The current GitHub links point to the verified existing account, `me-vishnurnair
 
 ## Update project links
 
-`app.js` contains the project data and `published` mapping. Enter an actual verified demo URL only after successful deployment. Until then the UI clearly says publication is pending. The four screenshots are real local browser captures, not rendered mockups.
+`app.js` contains the project data and `published` mapping. Enter an actual verified demo URL only after successful deployment. Until then the UI clearly says publication is pending. The project screenshots are real local browser captures, not rendered mockups.
 
 ## Verification
 
 Live HTTP checks passed on 1 October 2026 for the portfolio, NoteLens and RepoCheck. The [verification workflow](https://github.com/me-vishnurnair/portfolio/actions/runs/36832848807) exercises asset delivery, the resume download, note-search sessions and scanner input boundaries. CampusTrack now has a free static browser edition with local persistence and backup/restore, plus its original account edition on a trial database. See [current hosting and recovery](docs/DEPLOYMENT.md).
 
-The project detail dialog was opened and closed by keyboard in a browser. All four project images were generated from the applications. A 390 px mobile layout was checked for horizontal page overflow. No automated unit test mirrors static markup; functional checks target user behavior instead.
+The project detail dialog was opened and closed by keyboard in a browser. All project images were generated from the applications. A 390 px mobile layout was checked for horizontal page overflow. No automated unit test mirrors static markup; functional checks target user behavior instead.
+
+## Repository layout
+
+| Path | Purpose |
+| --- | --- |
+| `index.html`, `style.css`, `app.js` | Static application |
+| `assets/` | Published images and resume |
+| `scripts/` | Live verification |
+| `docs/` | Architecture, screenshots and dated verification |
+| `.github/workflows/` | CI workflows |
+
+[Documentation index](docs/README.md)
 
 ## Understand the code
 
@@ -62,4 +74,4 @@ Read [docs/EXPLAINED.md](docs/EXPLAINED.md) for the request flow, technology cho
 
 ## Attribution and license
 
-Original application code created for Vishnu R. Nair with AI assistance. Third-party libraries retain their licenses. The project is an AI-assisted learning build; the owner is working through the implementation. MIT license; see [LICENSE](LICENSE).
+By Vishnu R Nair. Built with AI assistance as a learning project. MIT licensed; see [LICENSE](LICENSE). Third-party libraries retain their own licenses.
